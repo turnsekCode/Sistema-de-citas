@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 import getServerSession from '@/lib/auth';
-import ProfileForm from '@/components/ProfileForm';
+import AppointmentForm from '@/components/AppointmentForm';
 
-export default async function ProfilePage() {
+export default async function NewAppointmentPage() {
   const session = await getServerSession();
   
   if (!session) {
@@ -11,8 +11,8 @@ export default async function ProfilePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Mi Perfil</h1>
-      <ProfileForm user={session.user} />
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Nueva Cita Médica</h1>
+      <AppointmentForm />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { updateProfile } from '@/services/userService';
-import { useAuth } from '../../app/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface ProfileFormProps {
   user: {

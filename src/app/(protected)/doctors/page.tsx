@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
-import { getServerSession } from '@/lib/auth';
-import DoctorList from '../../components/DoctorList';
+import getServerSession from '@/lib/auth';
+import DoctorList from '@/components/DoctorList';
 
 export default async function DoctorsPage() {
   const session = await getServerSession();

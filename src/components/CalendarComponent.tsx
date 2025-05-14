@@ -7,7 +7,7 @@ import {startOfWeek} from 'date-fns/startOfWeek';
 import {getDay} from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../../src/app/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { fetchAppointments } from '@/services/appointmentService';
 
 const locales = {

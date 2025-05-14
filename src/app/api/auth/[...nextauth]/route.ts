@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
-import dbConnect from '../../../lib/dbConnect';
+import dbConnect from '../../../../lib/dbConnect';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
-import { signToken } from '../../../lib/jwt';
+import { signToken } from '../../../../lib/jwt';
 
 export async function POST(req: Request) {
   await dbConnect();

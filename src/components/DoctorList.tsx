@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { fetchDoctors } from '@/services/doctorService';
-import DoctorCard from '../../app/components/DoctorCard';
+import DoctorCard from '@/components/DoctorCard';
 import { toast } from 'react-toastify';
 
 export default function DoctorList() {
-  const [doctors, setDoctors] = useState([]);
+  const [doctors, setDoctors] = useState<{ _id: string; name: string; specialty: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 

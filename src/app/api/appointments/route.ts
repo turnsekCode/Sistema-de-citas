@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import Appointment from '@/models/Appointment';
-import { getSession } from '@/lib/auth';
-import { sendAppointmentEmail } from '../../lib/sendEmail';
+import getServerSession from '@/lib/auth';
+//import { sendAppointmentEmail } from '@/lib/sendEmail';
 
 export async function GET(req: Request) {
   await dbConnect();
-  const session = await getSession();
+  const session = await getServerSession();
   
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -36,7 +36,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   await dbConnect();
-  const session = await getSession();
+  const session = await getServerSession();
   
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -57,12 +57,12 @@ export async function POST(req: Request) {
     await appointment.save();
     
     // Send confirmation email
-    await sendAppointmentEmail(session.user.email, 'Appointment Created', {
-      appointmentId: appointment._id,
-      date: appointment.date,
-      doctor: appointment.doctor,
-      reason: appointment.reason,
-    });
+    //await sendAppointmentEmail(session.user.email, 'Appointment Created', {
+    //  appointmentId: appointment._id,
+    //  date: appointment.date,
+    //  doctor: appointment.doctor,
+    //  reason: appointment.reason,
+    //});
     
     return NextResponse.json(
       { message: 'Appointment created successfully', appointment },
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
   await dbConnect();
-  const session = await getSession();
+  const session = await getServerSession();
   
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -106,15 +106,15 @@ export async function PUT(req: Request) {
     ).populate('doctor', 'name specialty');
     
     // Send update email
-    if (updatedAppointment) {
-      await sendAppointmentEmail(session.user.email, 'Appointment Updated', {
-        appointmentId: updatedAppointment._id,
-        date: updatedAppointment.date,
-        doctor: updatedAppointment.doctor,
-        reason: updatedAppointment.reason,
-        status: updatedAppointment.status,
-      });
-    }
+    //if (updatedAppointment) {
+    //  await sendAppointmentEmail(session.user.email, 'Appointment Updated', {
+    //    appointmentId: updatedAppointment._id,
+    //    date: updatedAppointment.date,
+    //    doctor: updatedAppointment.doctor,
+    //    reason: updatedAppointment.reason,
+    //    status: updatedAppointment.status,
+    //  });
+    //}
     
     return NextResponse.json(
       { message: 'Appointment updated successfully', appointment: updatedAppointment }
@@ -130,7 +130,7 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   await dbConnect();
-  const session = await getSession();
+  const session = await getServerSession();
   
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
@@ -153,11 +153,11 @@ export async function DELETE(req: Request) {
     await Appointment.findByIdAndDelete(id);
     
     // Send cancellation email
-    await sendAppointmentEmail(session.user.email, 'Appointment Cancelled', {
-      appointmentId: appointment._id,
-      date: appointment.date,
-      doctor: appointment.doctor,
-    });
+    //await sendAppointmentEmail(session.user.email, 'Appointment Cancelled', {
+    //  appointmentId: appointment._id,
+    //  date: appointment.date,
+    //  doctor: appointment.doctor,
+    //});
     
     return NextResponse.json({ message: 'Appointment deleted successfully' });
   } catch (error) {

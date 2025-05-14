@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
-import { getServerSession } from '../../lib/auth';
-import ReportsDashboard from '../../components/ReportsDashboard';
+import getServerSession from '@/lib/auth';
+import ReportsDashboard from '@/components/ReportsDashboard';
 
 export default async function ReportsPage() {
   const session = await getServerSession();

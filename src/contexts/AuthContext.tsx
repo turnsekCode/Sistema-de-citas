@@ -10,6 +10,7 @@ interface AuthContextType {
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   loading: boolean;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextType>({
   register: async () => {},
   logout: () => {},
   loading: true,
+  setUser: () => {}, // Provide a default no-op function for setUser
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -104,7 +106,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, loading, setUser }}>
       {children}
     </AuthContext.Provider>
   );

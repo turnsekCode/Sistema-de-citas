@@ -1,5 +1,5 @@
-import { signToken } from '../../../lib/jwt';
-import connectDB from '../../../lib/dbConnect';
+import { signToken } from '@/lib/jwt';
+import connectDB from '@/lib/dbConnect';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
 import { NextResponse } from 'next/server';

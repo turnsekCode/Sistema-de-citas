@@ -1,6 +1,6 @@
-import  dbConnect  from '../../../lib/dbConnect';
+import  dbConnect  from '@/lib/dbConnect';
 import User from '@/models/User';
-import { verifyToken } from '../../../lib/jwt';
+import { verifyToken } from '@/lib/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
