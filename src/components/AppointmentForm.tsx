@@ -23,7 +23,7 @@ interface AppointmentFormProps {
 }
 
 export default function AppointmentForm({ appointment }: AppointmentFormProps) {
-    console.log('AppointmentForm base', appointment);
+  console.log('AppointmentForm base', appointment);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -5,7 +5,7 @@ import CalendarComponent from "@/components/CalendarComponent";
 
 export default async function AppointmentsPage() {
     const session = await getServerSession();
-    console.log("Session appoinment:", session);
+    //console.log("Session appoinment:", session);
     if (!session) {
         redirect("/login");
     }

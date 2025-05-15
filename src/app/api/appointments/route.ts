@@ -7,11 +7,10 @@ import getServerSession from '@/lib/auth';
 export async function GET(req: Request) {
   await dbConnect();
   const session = await getServerSession();
-  
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
-  
+
   try {
     let appointments;
     
@@ -26,7 +25,7 @@ export async function GET(req: Request) {
     
     return NextResponse.json(appointments);
   } catch (error) {
-    console.error('Error fetching appointments:', error);
+    console.error('Error fetching appointments 2:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
       { status: 500 }

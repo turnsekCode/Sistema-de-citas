@@ -33,7 +33,8 @@ export default function AppointmentList() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled' | 'completed'>('all');
   const [searchTerm, setSearchTerm] = useState('');
-
+  //console.log('User listado:', user);
+  //console.log('Appointments listado:', appointments);
   useEffect(() => {
     const loadAppointments = async () => {
       try {

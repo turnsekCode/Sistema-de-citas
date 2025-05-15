@@ -1,7 +1,8 @@
 import { IAppointment } from '@/models/Appointment';
 
 export async function fetchAppointments() {
-  const res = await fetch('/api/appointments');
+  const res = await fetch('/api/appointments', { credentials: 'include' });
+  console.log('Response fetch appointments:', res);
   if (!res.ok) throw new Error('Failed to fetch appointments');
   return await res.json();
 }
