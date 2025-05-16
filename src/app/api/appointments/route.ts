@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import Appointment from '@/models/Appointment';
+import Doctor from '@/models/Doctor'; // Importa el modelo Doctor
+import User from '@/models/User'; // Importa el modelo User
 import getServerSession from '@/lib/auth';
 //import { sendAppointmentEmail } from '@/lib/sendEmail';
 
@@ -15,13 +17,25 @@ export async function GET(req: Request) {
     let appointments;
     
     if (session.user.role === 'admin') {
-      appointments = await Appointment.find()
-        .populate('patient', 'name email')
-        .populate('doctor', 'name specialty');
-    } else {
-      appointments = await Appointment.find({ patient: session.user._id })
-        .populate('doctor', 'name specialty');
-    }
+        appointments = await Appointment.find()
+          .populate({
+            path: 'patient',
+            model: User, // Usa el modelo importado
+            select: 'name email'
+          })
+          .populate({
+            path: 'doctor',
+            model: Doctor, // Usa el modelo importado
+            select: 'name specialty'
+          });
+      } else {
+        appointments = await Appointment.find({ patient: session.user._id })
+          .populate({
+            path: 'doctor',
+            model: Doctor, // Usa el modelo importado
+            select: 'name specialty'
+          });
+      }
     
     return NextResponse.json(appointments);
   } catch (error) {
