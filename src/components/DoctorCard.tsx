@@ -8,6 +8,7 @@ interface DoctorCardProps {
 }
 
 export default function DoctorCard({ doctor }: DoctorCardProps) {
+    console.log("doctor info",doctor);
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="p-6">

@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { fetchDoctors } from '@/services/doctorService';
 import DoctorCard from '@/components/DoctorCard';
 import { toast } from 'react-toastify';
+import { IDoctor } from '@/models/Doctor';
 
 export default function DoctorList() {
-  const [doctors, setDoctors] = useState<{ _id: string; name: string; specialty: string }[]>([]);
+  const [doctors, setDoctors] = useState<IDoctor[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -26,7 +27,7 @@ export default function DoctorList() {
     loadDoctors();
   }, []);
 
-  const filteredDoctors = doctors.filter(doctor =>
+  const filteredDoctors: IDoctor[] = doctors.filter(doctor =>
     doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     doctor.specialty.toLowerCase().includes(searchTerm.toLowerCase())
   );

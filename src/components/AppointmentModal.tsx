@@ -102,7 +102,7 @@ export default function AppointmentModal({
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
                 <div className="p-6">
                     <div className="flex justify-between items-center mb-4">
@@ -152,12 +152,21 @@ export default function AppointmentModal({
                                             .toISOString()
                                             .split("T")[0]
                                     }
-                                    onChange={(e) =>
+                                    onChange={(e) => {
+                                        const [year, month, day] = e.target.value.split("-").map(Number);
+                                        const currentTime = new Date(formData.date);
+                                        const updatedDate = new Date(
+                                            year,
+                                            month - 1,
+                                            day,
+                                            currentTime.getHours(),
+                                            currentTime.getMinutes()
+                                        );
                                         setFormData((prev) => ({
                                             ...prev,
-                                            date: new Date(e.target.value),
-                                        }))
-                                    }
+                                            date: updatedDate,
+                                        }));
+                                    }}
                                     required
                                     className="w-full p-2 border border-gray-300 rounded-md"
                                     disabled={loading}

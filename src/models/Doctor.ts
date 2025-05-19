@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IDoctor extends Document {
+  _id: string;
   name: string;
   specialty: string;
   schedule: {

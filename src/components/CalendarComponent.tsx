@@ -2,7 +2,7 @@
 
 import { Calendar, dateFnsLocalizer, Views, View } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay, addMinutes } from "date-fns";
-import { es as esES } from "date-fns/locale";
+import { es as esES } from "date-fns/locale/es";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -62,7 +62,7 @@ export default function EnhancedCalendar() {
     const [view, setView] = useState<View>(Views.WEEK);
     const handleViewChange = (newView: View) => {
         setView(newView);
-      };
+    };
     console.log("slot", selectedSlot);
     console.log("event", selectedEvent);
     useEffect(() => {
@@ -93,10 +93,17 @@ export default function EnhancedCalendar() {
     }, [user]);
 
     const handleSelectSlot = (slotInfo: { start: Date; end: Date }) => {
-        setSelectedSlot({
-            start: slotInfo.start,
-            end: slotInfo.end,
-        });
+        let start = slotInfo.start;
+        let end = slotInfo.end;
+
+        // Si la vista actual es "month", ajusta la hora manualmente
+        if (view === "month") {
+            // Por ejemplo: 09:00 a 09:30
+            start = new Date(start.setHours(9, 0, 0, 0));
+            end = new Date(start.getTime() + 30 * 60 * 1000); // 30 minutos después
+        }
+
+        setSelectedSlot({ start, end });
         setShowAppointmentModal(true);
     };
 
@@ -169,6 +176,8 @@ export default function EnhancedCalendar() {
                 localizer={localizer}
                 events={events}
                 startAccessor="start"
+                min={new Date(0, 0, 0, 9)}
+                max={new Date(0, 0, 0, 22)}
                 endAccessor="end"
                 style={{ height: "100%" }}
                 defaultView={view}
@@ -180,12 +189,10 @@ export default function EnhancedCalendar() {
                     day: true,
                     agenda: true,
                 }}
-                
                 selectable
                 onSelectEvent={handleSelectEvent}
                 onSelectSlot={handleSelectSlot}
                 onNavigate={setCurrentDate}
-                
                 date={currentDate}
                 eventPropGetter={eventStyleGetter}
                 culture="es"
