@@ -8,7 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 export default function ReportsDashboard() {
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
+    console.log('Loading appointment stats...',stats );
   useEffect(() => {
     const loadStats = async () => {
       try {
@@ -34,16 +34,19 @@ export default function ReportsDashboard() {
   }
 
   const statusData = [
-    { name: 'Pendientes', value: stats.statusCounts.pending },
-    { name: 'Confirmadas', value: stats.statusCounts.confirmed },
-    { name: 'Canceladas', value: stats.statusCounts.cancelled },
-    { name: 'Completadas', value: stats.statusCounts.completed },
+    { name: 'Pendientes', value: stats?.data?.statusCounts?.pending },
+    { name: 'Confirmadas', value: stats?.data?.statusCounts?.confirmed },
+    { name: 'Canceladas', value: stats?.data?.statusCounts?.cancelled },
+    { name: 'Completadas', value: stats?.data?.statusCounts?.completed },
   ];
 
-  const monthlyData = Object.entries(stats.monthlyCounts).map(([month, count]) => ({
+  const monthlyData = Object.entries(stats?.data?.monthlyCounts ?? {}).map(
+  ([month, count]) => ({
     name: month,
     citas: count,
-  }));
+  })
+);
+
 
   return (
     <div className="space-y-8">
@@ -52,19 +55,19 @@ export default function ReportsDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-blue-50 p-4 rounded">
             <h3 className="text-sm font-medium text-blue-800">Total Citas</h3>
-            <p className="text-2xl font-bold">{stats.totalAppointments}</p>
+            <p className="text-2xl font-bold">{stats.data?.totalAppointments}</p>
           </div>
           <div className="bg-green-50 p-4 rounded">
             <h3 className="text-sm font-medium text-green-800">Citas Hoy</h3>
-            <p className="text-2xl font-bold">{stats.todaysAppointments}</p>
+            <p className="text-2xl font-bold">{stats.data?.todaysAppointments}</p>
           </div>
           <div className="bg-yellow-50 p-4 rounded">
             <h3 className="text-sm font-medium text-yellow-800">Citas Pendientes</h3>
-            <p className="text-2xl font-bold">{stats.statusCounts.pending}</p>
+            <p className="text-2xl font-bold">{stats?.data?.statusCounts?.pending}</p>
           </div>
           <div className="bg-purple-50 p-4 rounded">
             <h3 className="text-sm font-medium text-purple-800">Doctores</h3>
-            <p className="text-2xl font-bold">{stats.totalDoctors}</p>
+            <p className="text-2xl font-bold">{stats?.data?.totalDoctors}</p>
           </div>
         </div>
       </div>
