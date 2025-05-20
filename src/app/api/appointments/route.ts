@@ -109,7 +109,7 @@ export async function PUT(req: Request) {
     
     // Only allow admin or the patient who created the appointment to update it
     if (session.user.role !== 'admin' && appointment.patient.toString() !== session.user._id) {
-      return NextResponse.json({ message: 'Unauthorized' }, { status: 403 });
+      return NextResponse.json({ message: 'Unauthorized must be admin' }, { status: 403 });
     }
     
     const updatedAppointment = await Appointment.findByIdAndUpdate(

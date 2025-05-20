@@ -21,9 +21,14 @@ export default function Navbar() {
           {user ? (
             <>
               {user.role === 'admin' && (
-                <Link href="/admin" className="hover:text-blue-600">
-                  Admin
-                </Link>
+                <>
+                  <Link href="/admin" className="hover:text-blue-600">
+                    Admin
+                  </Link>
+                  <Link href="/doctors/add" className="hover:text-blue-600">
+                    Crear doctor
+                  </Link>
+                </>
               )}
               <Link href="/appointments" className="hover:text-blue-600">
                 Citas

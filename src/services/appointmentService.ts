@@ -7,6 +7,12 @@ export async function fetchAppointments() {
   return await res.json();
 }
 
+export async function fetchAppointmentById(id: string): Promise<any> {
+  const res = await fetch(`/api/appointments/${id}`, { credentials: 'include' });
+  if (!res.ok) throw new Error('Failed to fetch appointment');
+  return await res.json();
+}
+
 export async function createAppointment(data: any) {
   const res = await fetch('/api/appointments', {
     method: 'POST',
