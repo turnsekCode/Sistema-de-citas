@@ -12,7 +12,7 @@ export default async function AppointmentsPage() {
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold text-gray-800 mb-6">
-                Create doctor
+                Editar doctor
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2 lg:col-span-2">

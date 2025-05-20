@@ -13,7 +13,7 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-800">
-                    Dr. {doctor.name}
+                    {doctor.name}
                 </h3>
                 <p className="text-blue-600 mt-1">{doctor.specialty}</p>
 
@@ -46,6 +46,12 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
                         className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
                     >
                         Agendar Cita
+                    </Link>
+                    <Link
+                        href={`/doctors/add?id=${doctor._id}`}
+                        className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                    >
+                        Editar doctor
                     </Link>
                 </div>
             </div>

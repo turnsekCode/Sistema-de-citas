@@ -21,6 +21,12 @@ export async function createDoctor(data: any) {
     return await res.json();
 }
 
+export async function fetchDoctorById(id: string): Promise<IDoctor> {
+    const res = await fetch(`/api/doctors/${id}`);
+    if (!res.ok) throw new Error("Failed to fetch doctor");
+    return await res.json();
+}
+
 export async function updateDoctor(id: string, data: any) {
     const res = await fetch("/api/doctors", {
         method: "PUT",
