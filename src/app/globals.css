@@ -57,3 +57,12 @@
 .Toastify__toast--info {
   @apply bg-blue-500 text-white;
 }
+
+.rbc-agenda-table tbody{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rbc-agenda-table tbody tr{
+  border-radius: 0!important;
+}

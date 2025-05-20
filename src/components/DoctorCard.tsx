@@ -10,7 +10,7 @@ interface DoctorCardProps {
 export default function DoctorCard({ doctor }: DoctorCardProps) {
     console.log("doctor info", doctor);
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col justify-between">
             <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-800">
                     {doctor.name}
@@ -39,21 +39,20 @@ export default function DoctorCard({ doctor }: DoctorCardProps) {
                         ))}
                     </ul>
                 </div>
-
-                <div className="mt-6">
-                    <Link
-                        href={`/appointments/new?doctorId=${doctor._id}`}
-                        className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                    >
-                        Agendar Cita
-                    </Link>
-                    <Link
-                        href={`/doctors/add?id=${doctor._id}`}
-                        className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                    >
-                        Editar doctor
-                    </Link>
-                </div>
+            </div>
+            <div className="p-6 flex gap-4">
+                <Link
+                    href={`/appointments/new?doctorId=${doctor._id}`}
+                    className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                >
+                    Agendar Cita
+                </Link>
+                <Link
+                    href={`/doctors/add?id=${doctor._id}`}
+                    className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                >
+                    Editar doctor
+                </Link>
             </div>
         </div>
     );

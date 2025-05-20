@@ -72,7 +72,7 @@ export default function EnhancedCalendar() {
 
                 const formattedEvents = appointments.map(
                     (appt: Appointment) => ({
-                        title: `Dr. ${appt.doctor.name} - ${appt.reason}`,
+                        title: `${appt.doctor.name} - ${appt.reason}`,
                         start: new Date(appt.date),
                         end: addMinutes(new Date(appt.date), 30),
                         allDay: false,

@@ -43,7 +43,7 @@ export default function DoctorList() {
                 <input
                     type="text"
                     placeholder="Buscar doctores por nombre o especialidad..."
-                    className="w-full p-2 border rounded-md"
+                    className="w-full p-2 border rounded-md border-gray-300"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />

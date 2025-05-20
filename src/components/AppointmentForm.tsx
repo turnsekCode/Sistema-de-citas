@@ -149,7 +149,7 @@ export default function AppointmentForm() {
                         <option value="">Selecciona un doctor</option>
                         {doctors.map((doctor: any) => (
                             <option key={doctor._id} value={doctor._id}>
-                                Dr. {doctor.name} - {doctor.specialty}
+                                {doctor.name} - {doctor.specialty}
                             </option>
                         ))}
                     </select>
