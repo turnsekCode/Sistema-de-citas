@@ -234,7 +234,7 @@ export default function AppointmentList() {
                                             )}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            Dr. {appointment.doctor.name}
+                                            {appointment.doctor.name}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {appointment.doctor.specialty}

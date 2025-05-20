@@ -28,6 +28,9 @@ export default function Navbar() {
                   <Link href="/doctors/add" className="hover:text-blue-600">
                     Crear doctor
                   </Link>
+                  <Link href="/reports" className="hover:text-blue-600">
+                    Reportes
+                  </Link>
                 </>
               )}
               <Link href="/appointments" className="hover:text-blue-600">

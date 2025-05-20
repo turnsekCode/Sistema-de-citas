@@ -17,6 +17,7 @@ interface AppointmentFormData {
     date: string;
     reason: string;
     notes?: string;
+    status?: string;
 }
 
 interface Doctor {
@@ -40,7 +41,13 @@ export default function AppointmentForm() {
     const [doctors, setDoctors] = useState<Doctor[]>([]);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
-
+    const appointmentStatuses = [
+        { value: "pending", label: "Pendiente" },
+        { value: "confirmed", label: "Confirmada" },
+        { value: "cancelled", label: "Cancelada" },
+        { value: "completed", label: "Completada" },
+    ];
+    console.log("Usuario:", doctors);
     // Cargar datos iniciales
     useEffect(() => {
         const loadInitialData = async () => {
@@ -64,6 +71,7 @@ export default function AppointmentForm() {
                                 .slice(0, 16),
                             reason: existingAppointment.reason,
                             notes: existingAppointment.notes || "",
+                            status: existingAppointment.status,
                         });
                     }
                 } else {
@@ -73,6 +81,7 @@ export default function AppointmentForm() {
                         date: new Date().toISOString().slice(0, 16),
                         reason: "",
                         notes: "",
+                        status: "pending",
                     });
                 }
             } catch (error) {
@@ -199,6 +208,31 @@ export default function AppointmentForm() {
                         className="w-full p-2 border border-gray-300 rounded-md"
                         disabled={loading}
                     />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Estado de la cita
+                    </label>
+                    <select
+                        {...register("status", {
+                            required: "Selecciona un estado",
+                        })}
+                        className={`w-full p-2 border rounded-md ${errors.status ? "border-red-500" : "border-gray-300"}`}
+                        disabled={loading}
+                    >
+                        <option value="">Selecciona un estado</option>
+                        {appointmentStatuses.map((status) => (
+                            <option key={status.value} value={status.value}>
+                                {status.label}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.status && (
+                        <p className="mt-1 text-sm text-red-600">
+                            {errors.status.message}
+                        </p>
+                    )}
                 </div>
 
                 <div className="flex justify-end space-x-3">
